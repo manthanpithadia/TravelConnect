@@ -8,4 +8,6 @@
     <color name="txt_light_white">#DFDFDF</color>
     <color name="txt_white">#FFFFFFFF</color>
 
+    <color name="chip_bg">#353535</color>
+    <color name="bottom_nav_bar">#0B0B0B</color>
 </resources>

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TravelConnect</string>
+    <string name="travel_connect">Travel Connect</string>
+    <string name="chip_text">Chip Text</string>
+    <string name="banff">Banff</string>
+    <string name="near_to_you">Near to you</string>
+    <string name="restaurants">Restaurants</string>
 </resources>
