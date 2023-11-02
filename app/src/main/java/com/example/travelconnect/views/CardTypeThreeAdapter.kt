@@ -10,13 +10,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travelconnect.R
 import com.example.travelconnect.data.model.CardItemTypeThree
-import com.example.travelconnect.data.model.CardItemTypeTwo
 
 class CardTypeThreeAdapter(private val context: Context, private val cardItems: List<CardItemTypeThree>) :
     RecyclerView.Adapter<CardTypeThreeAdapter.HorizontalCardViewHolder>() {
 
     inner class HorizontalCardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val backgroundImageView: ImageView = itemView.findViewById(R.id.img_card_background)
+        val backgroundImageView: ImageView = itemView.findViewById(R.id.img_card_background3)
         val titleTextView: TextView = itemView.findViewById(R.id.txt_card_title)
         val locationTextView: TextView = itemView.findViewById(R.id.txt_card_location)
         val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar)

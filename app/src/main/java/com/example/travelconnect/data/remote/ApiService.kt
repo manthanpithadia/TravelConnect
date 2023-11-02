@@ -1,9 +1,13 @@
 package com.example.travelconnect.data.remote
 
+import ActivityItem
+import ImageModel
+import LocationItem
 import com.example.travelconnect.data.model.LoginRequest
 import com.example.travelconnect.data.model.SignUpRequest
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiService {
@@ -12,4 +16,14 @@ interface ApiService {
 
     @POST("/auth/login")
     fun login(@Body request: LoginRequest): Call<Any> // Modify the return type as needed
+
+    @POST("dashboard/trending")
+    fun getTrendingLocations(): Call<List<LocationItem>>
+
+    @POST("dashboard/activities")
+    fun getActivities(): Call<List<ActivityItem>>
+
+    @POST("searchScreen/allImagesShuffled")
+    fun getImages(): Call<List<ImageModel>>
+
 }

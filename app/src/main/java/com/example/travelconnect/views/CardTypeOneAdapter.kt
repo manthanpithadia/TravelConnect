@@ -1,5 +1,3 @@
-package com.example.travelconnect.views
-
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +7,9 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travelconnect.R
-import com.example.travelconnect.data.model.CardItem
+import com.squareup.picasso.Picasso
 
-class CardTypeOneAdapter(private val context: Context, private val cardItems: List<CardItem>) :
+class CardTypeOneAdapter(private val context: Context, private val locationItems: List<LocationItem>) :
     RecyclerView.Adapter<CardTypeOneAdapter.CardViewHolder>() {
 
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -19,7 +17,6 @@ class CardTypeOneAdapter(private val context: Context, private val cardItems: Li
         val titleTextView: TextView = itemView.findViewById(R.id.txt_title)
         val locationTextView: TextView = itemView.findViewById(R.id.txt_location)
         val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar)
-        val ratingCountTextView: TextView = itemView.findViewById(R.id.txt_rating)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
@@ -28,16 +25,18 @@ class CardTypeOneAdapter(private val context: Context, private val cardItems: Li
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-        val item = cardItems[position]
+        val item = locationItems[position]
 
-        holder.imageView.setImageResource(item.imageResId)
-        holder.titleTextView.text = item.title
-        holder.locationTextView.text = item.location
-        holder.ratingBar.rating = item.rating
-        holder.ratingCountTextView.text = item.ratingCount
+        // Load the image using Picasso (you may need to add Picasso as a dependency)
+        Picasso.get().load(item.img).resize(250, 250)
+            .centerCrop().into(holder.imageView)
+
+        holder.titleTextView.text = item.name
+        holder.locationTextView.text = item.province
+        holder.ratingBar.rating = item.rating.toFloat()
     }
 
     override fun getItemCount(): Int {
-        return cardItems.size
+        return locationItems.size
     }
 }
