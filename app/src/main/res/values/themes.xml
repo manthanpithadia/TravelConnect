@@ -3,6 +3,7 @@
     <style name="Base.Theme.TravelConnect" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowFullscreen">true</item>
     </style>
 
     <style name="Theme.TravelConnect" parent="Base.Theme.TravelConnect" />

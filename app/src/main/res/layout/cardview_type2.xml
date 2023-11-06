@@ -3,6 +3,7 @@
     android:layout_width="@dimen/_180sdp"
     android:layout_height="@dimen/_120sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="@dimen/_15sdp"
     android:layout_marginRight="@dimen/_5sdp">
 
@@ -38,12 +39,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/banff"
+                tools:text="@string/banff"
                 android:textColor="@color/txt_light_white"
                 android:textSize="@dimen/_16sdp"
                 />
 
             <LinearLayout
+                android:id="@+id/hidden_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView

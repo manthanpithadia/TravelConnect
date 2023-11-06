@@ -5,4 +5,6 @@
     <string name="banff">Banff</string>
     <string name="near_to_you">Near to you</string>
     <string name="restaurants">Restaurants</string>
+    <string name="images">Images</string>
+    <string name="explore">Explore</string>
 </resources>

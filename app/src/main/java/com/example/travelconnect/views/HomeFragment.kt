@@ -8,6 +8,8 @@ import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -15,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travelconnect.R
 import com.example.travelconnect.data.model.CardItemTypeThree
@@ -23,6 +26,8 @@ import com.example.travelconnect.viewmodels.HomeViewModel
 import com.example.travelconnect.views.CardTypeThreeAdapter
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.chip.Chip
+import com.squareup.picasso.Picasso
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -69,14 +74,16 @@ class HomeFragment : Fragment() {
                 } else {
                     // Handle location not available
                     Toast.makeText(requireContext(), "location not available", Toast.LENGTH_SHORT).show()
-
                 }
             }
 
         val fullText = "Travel Connect"
         val targetText = "Connect"
         createMultiColoredText(binding.title, fullText, targetText)
-        binding.btnAdd.setOnClickListener { Toast.makeText(requireContext(), "will implement in Iteration 3", Toast.LENGTH_SHORT).show() }
+        binding.btnAdd.setOnClickListener {
+            //Toast.makeText(requireContext(), "will implement in Iteration 3", Toast.LENGTH_SHORT).show()
+            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_locationFragment2)
+        }
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         val adapter = ChipAdapter(viewModel.chipItems)
         binding.recyclerView.adapter = adapter
@@ -86,23 +93,72 @@ class HomeFragment : Fragment() {
 
         viewModel.getTrendingLocations().observe(viewLifecycleOwner, Observer { locations ->
             // Update the adapter with the data
-            val cardAdapter = CardTypeOneAdapter(requireContext(), locations)
-            binding.recyclerViewCard1.adapter = cardAdapter
+           // val cardAdapter = CardTypeOneAdapter(requireContext(), locations)
+            binding.recyclerViewCard1.adapter = createLocationAdapter(locations)
         })
 
         // card view type 2
         binding.recyclerViewCard2.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
        // val cardItemTypeTwo = createDummyCardItemsTypeTwo()
-        viewModel.getActivities().observe(viewLifecycleOwner, Observer { locations ->
+        viewModel.getActivities().observe(viewLifecycleOwner, Observer { activities ->
             // Update the adapter with the data
-            val cardAdapter = CardTypeTwoAdapter(requireContext(), locations)
-            binding.recyclerViewCard2.adapter = cardAdapter
+          //  val cardAdapter = CardTypeTwoAdapter(requireContext(), activities)
+            binding.recyclerViewCard2.adapter = createActivityAdapter(activities)
         })
 
         // card view type 2
         binding.recyclerViewCard3.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         val cardItemTypeThree = createDummyCardItemsTypeThree()
         binding.recyclerViewCard3.adapter = CardTypeThreeAdapter(requireContext(), cardItemTypeThree)
+    }
+
+    private fun createActivityAdapter(activities:List<ActivityItem>): GenericAdapter<ActivityItem> {
+        return GenericAdapter<ActivityItem>(
+            R.layout.cardview_type2, // Replace with your item layout resource
+            onBind = { itemView, item ->
+                val imageView: ImageView = itemView.findViewById(R.id.img_card_background)
+                val titleTextView: TextView = itemView.findViewById(R.id.txt_card_title)
+                val locationTextView: TextView = itemView.findViewById(R.id.txt_card_location)
+                // Load the image using Picasso (you may need to add Picasso as a dependency)
+                // Load the image using Picasso (make sure to add Picasso dependency)
+                Picasso.get().load(item.img).resize(250, 250)
+                    .centerCrop().into(imageView)
+                titleTextView.text = item.name
+                locationTextView.text = item.province
+            },
+            onItemClickListener = object : GenericAdapter.OnItemClickListener<ActivityItem> {
+                override fun onItemClick(item: ActivityItem) {
+                    // Handle the item click here
+                    // For example, you can display a Toast message with the item's text
+                    Toast.makeText(requireContext(), "Item clicked: ${item.name}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        ).apply { setData(activities) }
+    }
+    private fun createLocationAdapter(locations:List<LocationItem>): GenericAdapter<LocationItem> {
+        return GenericAdapter<LocationItem>(
+            R.layout.cardview_type1, // Replace with your item layout resource
+            onBind = { itemView, item ->
+                val imageView: ImageView = itemView.findViewById(R.id.img_background)
+                val titleTextView: TextView = itemView.findViewById(R.id.txt_title)
+                val locationTextView: TextView = itemView.findViewById(R.id.txt_location)
+                val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar)
+                // Load the image using Picasso (you may need to add Picasso as a dependency)
+                Picasso.get().load(item.img).resize(250, 250)
+                    .centerCrop().into(imageView)
+
+                titleTextView.text = item.name
+                locationTextView.text = item.province
+                ratingBar.rating = item.rating.toFloat()
+            },
+            onItemClickListener = object : GenericAdapter.OnItemClickListener<LocationItem> {
+                override fun onItemClick(item: LocationItem) {
+                    // Handle the item click here
+                    // For example, you can display a Toast message with the item's text
+                    Toast.makeText(requireContext(), "Item clicked: ${item.name}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        ).apply { setData(locations) }
     }
 
     private fun createDummyCardItemsTypeThree(): List<CardItemTypeThree> {
@@ -132,10 +188,6 @@ class HomeFragment : Fragment() {
 
         return cardItems
     }
-
-
-
-
     fun createMultiColoredText(textView: TextView, fullText: String, targetText: String) {
         val spannable = SpannableString(fullText)
 

@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_locationFragment2"
+            app:destination="@id/locationFragment" />
     </fragment>
 
     <fragment
@@ -20,6 +23,15 @@
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.example.travelconnect.views.LocationFragment"
+        android:label="LocationFragment" >
+        <action
+            android:id="@+id/action_locationFragment2_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 

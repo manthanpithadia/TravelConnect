@@ -4,17 +4,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ImageApiService {
-    private val retrofit: Retrofit
-    private val apiService: ApiService
-
-    init {
-        retrofit = Retrofit.Builder()
-            .baseUrl("https://travel-app-live-dc32b92a6df0.herokuapp.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        apiService = retrofit.create(ApiService::class.java)
-    }
+    private val retrofit: Retrofit = Retrofit.Builder()
+        .baseUrl("https://travel-app-live-dc32b92a6df0.herokuapp.com/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+    private val apiService: ApiService = retrofit.create(ApiService::class.java)
 
     fun getImages(callback: (List<ImageModel>?) -> Unit, errorCallback: () -> Unit) {
         val call = apiService.getImages()
