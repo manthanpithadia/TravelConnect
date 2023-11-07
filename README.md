@@ -32,7 +32,7 @@ We welcome contributions from the community to help improve the Travel Connect A
 
 ## Issues and Bug Reports
 
-If you encounter any issues or have suggestions for improvements, please [open an issue](#) on this repository. We appreciate your feedback and contributions.
+If you encounter any issues or have suggestions for improvements, please [open an issue](https://github.com/manthanpithadia/TravelConnect/issues) on this repository. We appreciate your feedback and contributions.
 
 ## License
 
