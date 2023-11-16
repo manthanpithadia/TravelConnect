@@ -7,4 +7,12 @@
     </style>
 
     <style name="Theme.TravelConnect" parent="Base.Theme.TravelConnect" />
+
+    <style name="YourCustomStyle">
+        <!-- Customize the active indicator -->
+        <item name="android:width">4dp</item> <!-- Set the width of the indicator -->
+        <item name="android:height">4dp</item> <!-- Set the height of the indicator -->
+        <item name="android:background">@android:color/transparent</item> <!-- Set the color of the indicator -->
+    </style>
+
 </resources>

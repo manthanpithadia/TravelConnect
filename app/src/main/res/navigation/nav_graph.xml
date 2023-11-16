@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_homeFragment_to_locationFragment2"
             app:destination="@id/locationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_planTripFragment"
+            app:destination="@id/planTripFragment" />
     </fragment>
 
     <fragment
@@ -34,5 +37,17 @@
             android:id="@+id/action_locationFragment2_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/planTripFragment"
+        android:name="com.example.travelconnect.views.PlanTripFragment"
+        android:label="PlanTripFragment" >
+        <action
+            android:id="@+id/action_planTripFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.example.travelconnect.views.UserProfileFragment"
+        android:label="UserProfileFragment" />
 
 </navigation>

@@ -22,7 +22,7 @@
             android:textColor="@color/txt_white"
             android:textSize="@dimen/_20sdp"
             app:layout_constraintStart_toStartOf="@+id/guideline_v10"
-            app:layout_constraintTop_toTopOf="@+id/guideline_h10" />
+            app:layout_constraintTop_toTopOf="@+id/guideline_h08" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -55,7 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toStartOf="@+id/guideline_v90"
-            app:layout_constraintTop_toTopOf="@+id/guideline_h10"
+            app:layout_constraintTop_toTopOf="@+id/guideline_h08"
             android:background="@drawable/bg_circle_white">
             <ImageView
                 android:layout_width="@dimen/_30sdp"
@@ -162,11 +162,11 @@
             tools:listitem="@layout/cardview_type3" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_h10"
+            android:id="@+id/guideline_h08"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent=".05" />
+            app:layout_constraintGuide_percent=".08" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_v10"

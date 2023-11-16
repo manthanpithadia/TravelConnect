@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.travelconnect.databinding.FragmentLocationBinding
+import com.example.travelconnect.utils.setTransparentStatusBar
 
 class LocationFragment : Fragment() {
 
@@ -23,14 +24,8 @@ class LocationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        activity?.window?.decorView?.systemUiVisibility =
-            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-
-// Set the status bar color to transparent
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            activity?.window?.statusBarColor = Color.TRANSPARENT
-        }
+        setTransparentStatusBar()
 
     }
+
 }
