@@ -5,9 +5,15 @@
     <color name="yellow">#FB8104</color>
     <color name="bg_black">#030303</color>
     <color name="edt_txt_bg">#1F1F1F</color>
+    <color name="edt_txt_bg2">#181818</color>
     <color name="txt_light_white">#DFDFDF</color>
     <color name="txt_white">#FFFFFFFF</color>
+    <color name="txt_hint">#757575</color>
+    <color name="edt_stoke">#1E1E1E</color>
 
     <color name="chip_bg">#353535</color>
     <color name="bottom_nav_bar">#0B0B0B</color>
+
+    <color name="selected_bottom_nav_color">#FFFFFF</color>
+    <color name="unselected_bottom_nav_color">#A1A1A1</color>
 </resources>

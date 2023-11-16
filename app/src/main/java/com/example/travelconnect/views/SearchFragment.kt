@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.travelconnect.databinding.FragmentSearchBinding
+import com.example.travelconnect.utils.setTransparentStatusBar
 import com.example.travelconnect.viewmodels.SearchViewModel
 
 class SearchFragment : Fragment() {
@@ -31,6 +32,7 @@ class SearchFragment : Fragment() {
         var gridImageAdapter = GridImageAdapter(requireContext())
         binding.imageGridView.adapter = gridImageAdapter
 
+        setTransparentStatusBar()
 
         // Observe LiveData for image list
         viewModel.getImageList().observe(viewLifecycleOwner) { imageList ->

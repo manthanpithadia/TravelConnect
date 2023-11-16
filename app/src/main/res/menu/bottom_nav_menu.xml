@@ -6,7 +6,17 @@
         android:icon="@drawable/ic_home" />
 
     <item
+        android:id="@+id/planTripFragment"
+        android:title="Add"
+        android:icon="@drawable/ic_add" />
+
+    <item
         android:id="@+id/searchFragment"
         android:title="Search"
         android:icon="@drawable/ic_search" />
+
+    <item
+        android:id="@+id/userProfileFragment"
+        android:title="user"
+        android:icon="@drawable/ic_user" />
 </menu>

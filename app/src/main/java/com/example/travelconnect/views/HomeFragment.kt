@@ -18,10 +18,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travelconnect.R
 import com.example.travelconnect.data.model.CardItemTypeThree
 import com.example.travelconnect.databinding.FragmentHomeBinding
+import com.example.travelconnect.utils.setTransparentStatusBar
 import com.example.travelconnect.viewmodels.HomeViewModel
 import com.example.travelconnect.views.CardTypeThreeAdapter
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -48,6 +50,7 @@ class HomeFragment : Fragment() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        setTransparentStatusBar()
 
         // Check and request location permissions
         if (ContextCompat.checkSelfPermission(
@@ -82,7 +85,7 @@ class HomeFragment : Fragment() {
         createMultiColoredText(binding.title, fullText, targetText)
         binding.btnAdd.setOnClickListener {
             //Toast.makeText(requireContext(), "will implement in Iteration 3", Toast.LENGTH_SHORT).show()
-            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_locationFragment2)
+            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_planTripFragment)
         }
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         val adapter = ChipAdapter(viewModel.chipItems)
@@ -131,6 +134,7 @@ class HomeFragment : Fragment() {
                     // Handle the item click here
                     // For example, you can display a Toast message with the item's text
                     Toast.makeText(requireContext(), "Item clicked: ${item.name}", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_homeFragment_to_locationFragment2)
                 }
             }
         ).apply { setData(activities) }
