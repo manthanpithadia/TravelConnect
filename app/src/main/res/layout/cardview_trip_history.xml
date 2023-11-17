@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_70sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_trip_history"
+    android:layout_marginVertical="@dimen/_5sdp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_location"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v"
+        app:layout_constraintTop_toTopOf="@+id/guideline_h" />
+
+    <TextView
+        android:id="@+id/txt_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="Banff"
+        android:textColor="@color/txt_light_white"
+        android:textSize="@dimen/_14sdp"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v2"
+        app:layout_constraintTop_toTopOf="@+id/guideline_h" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="Oct 10 to Oct 14"
+        android:textColor="@color/txt_light_white"
+        android:textSize="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_weather"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_v90"
+        app:layout_constraintTop_toTopOf="@+id/txt_weather" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="Alberta, CA"
+        android:textColor="@color/txt_light_white"
+        android:textSize="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_weather" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".20" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".90" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".20" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

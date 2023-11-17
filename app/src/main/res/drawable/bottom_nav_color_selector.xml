@@ -1,0 +1,5 @@
+<!-- res/drawable/bottom_nav_color_selector.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/selected_bottom_nav_color" android:state_checked="true" />
+    <item android:color="@color/unselected_bottom_nav_color" />
+</selector>

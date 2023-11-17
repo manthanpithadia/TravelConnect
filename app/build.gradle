@@ -19,6 +19,9 @@ android {
     viewBinding {
         enabled=true
     }
+    dataBinding{
+        enabled=true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -56,10 +59,16 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.google.android.material:material:1.10.0'
-    implementation "androidx.navigation:navigation-fragment-ktx:2.7.4"
-    implementation "androidx.navigation:navigation-ui-ktx:2.7.4"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.7.5"
+    implementation "androidx.navigation:navigation-ui-ktx:2.7.5"
 
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // Room Database
+    implementation "androidx.room:room-runtime:2.6.0"
+
+    // Kotlin Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
 }

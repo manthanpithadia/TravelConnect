@@ -1,4 +1,4 @@
-package com.example.travelconnect.data
+package com.example.travelconnect.data.repositories
 
 import com.example.travelconnect.data.model.LoginRequest
 import com.example.travelconnect.data.remote.ApiService

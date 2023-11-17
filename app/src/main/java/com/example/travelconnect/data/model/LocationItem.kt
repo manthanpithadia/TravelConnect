@@ -1,6 +1,9 @@
+import com.google.gson.annotations.SerializedName
+
 data class LocationItem(
-    val name: String,
-    val province: String,
-    val img: String,
-    val rating: Double
+    @SerializedName("_id") val id: String,
+    @SerializedName("name") val name: String,
+    @SerializedName("province") val province: String,
+    @SerializedName("img") val img: String,
+    @SerializedName("rating") val rating: Double
 )

@@ -2,34 +2,50 @@ package com.example.travelconnect.viewmodels
 
 import ActivityApiClient
 import ActivityItem
-import ImageApiService
-import ImageModel
 import LocationItem
+import LocationRepository
+import WeatherRepository
 import WeatherResponse
+import android.app.Activity
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.travelconnect.data.remote.LocationApiClient
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import toLocationEntities
 
-class HomeViewModel: ViewModel() {
+class HomeViewModel(application: Context): ViewModel()  {
 
     val chipItems = listOf("Top Locations", "Activities", "Explore New", "History", "Food")
 
     private val apiService = LocationApiClient.apiService
     private val activityApiService = ActivityApiClient.activityApiService
+    //private val repository: LocationRepository = LocationRepository(application)
 
 
 
+    //TODO: saveLocation into Local DB
     fun getTrendingLocations(): LiveData<List<LocationItem>> {
         val data = MutableLiveData<List<LocationItem>>()
 
         apiService.getTrendingLocations().enqueue(object : Callback<List<LocationItem>> {
             override fun onResponse(call: Call<List<LocationItem>>, response: Response<List<LocationItem>>) {
                 if (response.isSuccessful) {
-                    data.value = response.body()
+                    val locations = response.body()
+
+                    // Save locations to the local database
+                    locations?.let {
+                        viewModelScope.launch {
+                            //repository.saveLocationsToDb(it.toLocationEntities())
+                            data.value = it
+                        }
+                    }
+
                 } else {
                     // Handle the API error
                 }
@@ -39,7 +55,6 @@ class HomeViewModel: ViewModel() {
                 // Handle network errors
             }
         })
-
         return data
     }
 
@@ -92,5 +107,6 @@ class HomeViewModel: ViewModel() {
                 }
             })
     }
+
 
 }

@@ -17,6 +17,7 @@ interface ApiService {
     @POST("/auth/login")
     fun login(@Body request: LoginRequest): Call<Any> // Modify the return type as needed
 
+    // This is to get All the Location, This can also be used as Trending locations.
     @POST("dashboard/trending")
     fun getTrendingLocations(): Call<List<LocationItem>>
 

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_black">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_v90_new"
+        app:layout_constraintStart_toStartOf="@+id/guideline_v10_new"
+        app:layout_constraintTop_toTopOf="@+id/guideline_h05_new">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="Plan Trip"
+                android:textColor="@color/txt_white"
+                android:textSize="@dimen/_20sdp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/montserrat"
+                android:padding="@dimen/_5sdp"
+                android:text="Done"
+                android:textColor="@color/yellow"
+                android:textSize="@dimen/_15sdp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/bg_edt_txt"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_20sdp">
+
+            <ImageView
+                android:id="@+id/ic_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:srcCompat="@drawable/ic_location" />
+
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/actv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_toEndOf="@id/ic_location"
+                android:backgroundTint="@color/edt_txt_bg2"
+                android:hint="Enter Location"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/txt_white"
+                android:textColorHint="@color/txt_hint" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/s_date"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/bg_edt_txt"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ic_calander"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:srcCompat="@drawable/ic_calander" />
+
+            <TextView
+                android:id="@+id/txt_s_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_toEndOf="@id/ic_calander"
+                android:hint="Select Start Date"
+                android:textSize="@dimen/_14sdp"
+                android:paddingLeft="5dp"
+                android:textColorHint="@color/txt_hint"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/txt_light_white"
+                 />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/e_date"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/bg_edt_txt"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ic_calander2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:srcCompat="@drawable/ic_calander" />
+
+            <TextView
+                android:id="@+id/txt_e_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_toEndOf="@id/ic_calander2"
+                android:hint="Select End Date"
+                android:textSize="@dimen/_14sdp"
+                android:paddingLeft="5dp"
+                android:textColorHint="@color/txt_hint"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/txt_light_white"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/bg_edt_txt"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ic_food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:srcCompat="@drawable/ic_food" />
+
+            <Spinner
+                android:id="@+id/dateSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_toEndOf="@id/ic_food"
+                android:textSize="@dimen/_14sdp"
+                android:paddingLeft="5dp"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/txt_light_white"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_h05_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v10_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_v90_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".95" />
+</androidx.constraintlayout.widget.ConstraintLayout>

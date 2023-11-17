@@ -42,6 +42,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -49,8 +50,11 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         setTransparentStatusBar()
+
+        val viewModelFactory = HomeViewModelFactory(requireParentFragment().requireContext())
+        //viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
 
         // Check and request location permissions
         if (ContextCompat.checkSelfPermission(
@@ -147,6 +151,7 @@ class HomeFragment : Fragment() {
                 val titleTextView: TextView = itemView.findViewById(R.id.txt_title)
                 val locationTextView: TextView = itemView.findViewById(R.id.txt_location)
                 val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar)
+                val txtRating: TextView = itemView.findViewById(R.id.txt_rating)
                 // Load the image using Picasso (you may need to add Picasso as a dependency)
                 Picasso.get().load(item.img).resize(250, 250)
                     .centerCrop().into(imageView)
@@ -154,6 +159,8 @@ class HomeFragment : Fragment() {
                 titleTextView.text = item.name
                 locationTextView.text = item.province
                 ratingBar.rating = item.rating.toFloat()
+                txtRating.text = item.rating.toFloat().toString()
+
             },
             onItemClickListener = object : GenericAdapter.OnItemClickListener<LocationItem> {
                 override fun onItemClick(item: LocationItem) {
