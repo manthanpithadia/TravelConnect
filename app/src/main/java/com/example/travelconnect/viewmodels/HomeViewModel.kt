@@ -2,12 +2,13 @@ package com.example.travelconnect.viewmodels
 
 import ActivityApiClient
 import ActivityItem
+import DBHelper
 import LocationItem
-import LocationRepository
 import WeatherRepository
 import WeatherResponse
-import android.app.Activity
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,17 +18,15 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import toLocationEntities
 
-class HomeViewModel(application: Context): ViewModel()  {
+class HomeViewModel(val application: Context): ViewModel()  {
 
     val chipItems = listOf("Top Locations", "Activities", "Explore New", "History", "Food")
 
     private val apiService = LocationApiClient.apiService
     private val activityApiService = ActivityApiClient.activityApiService
     //private val repository: LocationRepository = LocationRepository(application)
-
-
+    private lateinit var dbHelper: DBHelper
 
     //TODO: saveLocation into Local DB
     fun getTrendingLocations(): LiveData<List<LocationItem>> {
@@ -42,6 +41,22 @@ class HomeViewModel(application: Context): ViewModel()  {
                     locations?.let {
                         viewModelScope.launch {
                             //repository.saveLocationsToDb(it.toLocationEntities())
+                            //TODO: add insert and retrieve function here.
+                            dbHelper = DBHelper(application)
+
+                            dbHelper.clearAllLocations()
+                            // Example: Insert data
+                            //val locationItem = LocationItem("1", "Location One", "Province A", "image_url", 4.5)
+                            locations.forEach { item->
+                                dbHelper.insertLocation(item)
+                            }
+
+                            // Example: Query data
+                            /*val loc = dbHelper.queryLocations()
+
+                            for (item in loc) {
+                                Log.d("location",item.toString())
+                            }*/
                             data.value = it
                         }
                     }

@@ -1,5 +1,7 @@
 package com.example.travelconnect.utils
 
+import DBHelper
+import Restaurant
 import android.app.DatePickerDialog
 import android.graphics.Color
 import android.os.Build
@@ -27,3 +29,18 @@ fun Fragment.showDatePickerDialog(listener: DatePickerDialog.OnDateSetListener) 
     val datePickerDialog = DatePickerDialog(requireContext(), listener, year, month, day)
     datePickerDialog.show()
 }
+
+fun DBHelper.getLocationNamesWithIds(): List<Pair<String, String>> {
+    val locations = queryLocations()
+    return locations.map { Pair(it.name, it.id) }
+}
+
+fun <T : Any> List<T>.createListWithFirstImage(getName: (T) -> String, getImages: (T) -> List<String>): List<Pair<String, String>> {
+    return map { item ->
+        val name = getName(item)
+        val firstImage = getImages(item).firstOrNull() ?: ""
+        Pair(name, firstImage)
+    }
+}
+
+

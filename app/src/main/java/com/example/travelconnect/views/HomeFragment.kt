@@ -52,9 +52,10 @@ class HomeFragment : Fragment() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         setTransparentStatusBar()
 
-        val viewModelFactory = HomeViewModelFactory(requireParentFragment().requireContext())
+        val viewModelFactory = HomeViewModelFactory(requireContext())
         //viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
+
 
         // Check and request location permissions
         if (ContextCompat.checkSelfPermission(
@@ -68,7 +69,6 @@ class HomeFragment : Fragment() {
                 locationPermissionCode
             )
         }
-
 
         // Get the current GPS location and make the API request
         fusedLocationClient.lastLocation
@@ -138,7 +138,7 @@ class HomeFragment : Fragment() {
                     // Handle the item click here
                     // For example, you can display a Toast message with the item's text
                     Toast.makeText(requireContext(), "Item clicked: ${item.name}", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_homeFragment_to_locationFragment2)
+                    findNavController().navigate(R.id.action_homeFragment_to_locationFragment)
                 }
             }
         ).apply { setData(activities) }

@@ -4,13 +4,14 @@
     android:layout_height="@dimen/_180sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginVertical="@dimen/_5sdp"
     app:cardCornerRadius="@dimen/_15sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
-            android:id="@+id/img_card_background"
+            android:id="@+id/img_explore_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/img_destinaiton"
@@ -23,7 +24,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:background="@drawable/gradient_black_top_to_bottom"
-            app:layout_constraintBottom_toBottomOf="@+id/img_card_background" />
+            app:layout_constraintBottom_toBottomOf="@+id/img_explore_bg" />
 
         <View
             android:id="@+id/view2"
@@ -43,12 +44,12 @@
             android:orientation="vertical"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_15sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_card_background"
+            app:layout_constraintBottom_toBottomOf="@+id/img_explore_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/view2">
 
             <TextView
-                android:id="@+id/txt_card_title"
+                android:id="@+id/explore_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
