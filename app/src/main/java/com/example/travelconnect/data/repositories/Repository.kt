@@ -2,6 +2,7 @@ package com.example.travelconnect.data.repositories
 
 import LocationDetails
 import com.example.travelconnect.data.model.LoginRequest
+import com.example.travelconnect.data.model.UserProfile
 import com.example.travelconnect.data.remote.ApiService
 import retrofit2.Call
 import retrofit2.Response

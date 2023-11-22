@@ -4,11 +4,17 @@ import ActivityItem
 import ImageModel
 import LocationDetails
 import LocationItem
+import com.example.travelconnect.data.model.AddTripRequest
 import com.example.travelconnect.data.model.LoginRequest
 import com.example.travelconnect.data.model.SignUpRequest
+import com.example.travelconnect.data.model.UserProfile
 import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -31,5 +37,13 @@ interface ApiService {
 
     @POST("location/{id}")
     fun getLocationDetails(@Path("id") id: String): Call<LocationDetails>
+
+    @POST("trip/addtrip")
+    fun addTrip(@Body request: AddTripRequest): Call<Any>
+
+   /* @POST("auth/profile")
+    fun getUserProfile(@Header("token") token: String): Call<UserProfile>*/
+   @POST("auth/profile")
+   fun getUserProfile(@Header("token") token: String): Call<UserProfile>
 
 }

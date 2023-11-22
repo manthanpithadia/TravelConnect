@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.travelconnect.ActivityNavigation
 import com.example.travelconnect.databinding.ActivityLoginBinding
+import com.example.travelconnect.viewmodels.LoginViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
@@ -16,8 +18,8 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-      //  viewModel = ViewModelProvider(this, ViewModelFactory(applicationContext)).get(MainViewModel::class.java)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this, LoginViewModelFactory(application))[MainViewModel::class.java]
+        //viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         binding.txtRegister.setOnClickListener {
             startActivity(Intent(this, ActivitySignup::class.java))
@@ -27,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
                 // Handle successful login
                 Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
                // Log.i("Log", "Done")
+                startActivity(Intent(this, ActivityNavigation::class.java))
             } else {
                 // Handle login failure
                 Toast.makeText(this, "Sign up failed", Toast.LENGTH_SHORT).show()

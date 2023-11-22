@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travelconnect.R
 import com.example.travelconnect.data.remote.ApiService
@@ -24,6 +25,9 @@ import com.example.travelconnect.data.repositories.Repository
 import com.example.travelconnect.databinding.FragmentLocationBinding
 import com.example.travelconnect.utils.createListWithFirstImage
 import com.example.travelconnect.utils.setTransparentStatusBar
+import com.example.travelconnect.utils.shareUrl
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.squareup.picasso.Picasso
 import kotlin.math.exp
 
@@ -33,7 +37,8 @@ class LocationFragment : Fragment() {
     private lateinit var viewModel: LocationViewModel
     private lateinit var locationAdapter: GenericAdapter<String> // String represents the image URL
     private lateinit var exploreAdapter: GenericAdapter<Pair<String, String>> // String represents the image URL
-
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val locationPermissionCode = 123
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,7 +50,7 @@ class LocationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setTransparentStatusBar()
-
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         // Access the arguments to get the name and ID
         val name = arguments?.getString(ARG_NAME)
         val id = arguments?.getString(ARG_ID)
@@ -68,6 +73,20 @@ class LocationFragment : Fragment() {
         // Set up to display explore data
         binding.recyclerViewExploreImages.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewExploreImages.adapter = exploreAdapter
+
+        binding.btnShare.setOnClickListener {
+            shareUrl("https://www.google.com/search?q=$name")
+        }
+
+        // Assuming you have a button with the ID btnOpenWebView
+        binding.btnDirection.setOnClickListener {
+            // Use the WebViewFragment to open the URL
+            openWebViewFragment("https://www.google.com/maps/dir/your+location/$name")
+        }
+
+        binding.btnPlanTrip.setOnClickListener {
+            openPlanTripFragment()
+        }
 
         // Observe the LiveData for location details
         viewModel.locationDetailsLiveData.observe(viewLifecycleOwner) { state ->
@@ -170,4 +189,21 @@ class LocationFragment : Fragment() {
         )
     }
 
+    private fun openWebViewFragment(url: String) {
+        val args = Bundle().apply {
+            putString("url", url)
+        }
+
+        view?.let {
+            Navigation.findNavController(it)
+                .navigate(com.example.travelconnect.R.id.action_locationFragment_to_webViewFragment, args)
+        }
+    }
+
+    private fun openPlanTripFragment(){
+        view?.let {
+            Navigation.findNavController(it)
+                .navigate(com.example.travelconnect.R.id.action_locationFragment_to_planTripFragment)
+        }
+    }
 }

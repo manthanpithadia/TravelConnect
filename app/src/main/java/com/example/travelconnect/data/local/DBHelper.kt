@@ -38,23 +38,39 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     fun insertLocation(locationItem: LocationItem) {
         val db = writableDatabase
 
-        val values = ContentValues().apply {
-            put(COLUMN_ID, locationItem.id)
-            put(COLUMN_NAME, locationItem.name)
-            put(COLUMN_PROVINCE, locationItem.province)
-            put(COLUMN_IMG, locationItem.img)
-            put(COLUMN_RATING, locationItem.rating)
-        }
+        // Check if the table exists
+        if (isTableExists(db, TABLE_NAME)) {
+            // Table exists, proceed with insertion
+            val values = ContentValues().apply {
+                put(COLUMN_ID, locationItem.id)
+                put(COLUMN_NAME, locationItem.name)
+                put(COLUMN_PROVINCE, locationItem.province)
+                put(COLUMN_IMG, locationItem.img)
+                put(COLUMN_RATING, locationItem.rating)
+            }
 
-        val newRowId = db.insert(TABLE_NAME, null, values)
+            val newRowId = db.insert(TABLE_NAME, null, values)
 
-        if (newRowId != -1L) {
-            Toast.makeText(context, "LocationItem inserted with ID: $newRowId", Toast.LENGTH_SHORT).show()
+            if (newRowId != -1L) {
+                //Toast.makeText(context, "LocationItem inserted with ID: $newRowId", Toast.LENGTH_SHORT).show()
+            } else {
+               // Toast.makeText(context, "Error inserting LocationItem", Toast.LENGTH_SHORT).show()
+            }
         } else {
-            Toast.makeText(context, "Error inserting LocationItem", Toast.LENGTH_SHORT).show()
+            // Table does not exist, handle accordingly
+           // Toast.makeText(context, "Table $TABLE_NAME does not exist", Toast.LENGTH_SHORT).show()
         }
 
         db.close()
+    }
+
+    // Function to check if a table exists in the database
+    private fun isTableExists(db: SQLiteDatabase, tableName: String): Boolean {
+        val query = "SELECT name FROM sqlite_master WHERE type='table' AND name='$tableName'"
+        val cursor = db.rawQuery(query, null)
+        val tableExists = cursor.moveToFirst()
+        cursor.close()
+        return tableExists
     }
 
     fun queryLocations(): List<LocationItem> {

@@ -15,4 +15,5 @@
         <item name="android:background">@android:color/transparent</item> <!-- Set the color of the indicator -->
     </style>
 
+
 </resources>

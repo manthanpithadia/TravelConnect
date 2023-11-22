@@ -1,25 +1,35 @@
 package com.example.travelconnect.views
 
+import DBHelper
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.travelconnect.R
 import com.example.travelconnect.databinding.FragmentPlanTripBinding
+import com.example.travelconnect.utils.getFromSharedPreferences
+import com.example.travelconnect.utils.getLocationNamesWithIds
 import com.example.travelconnect.utils.setTransparentStatusBar
 import com.example.travelconnect.utils.showDatePickerDialog
+import com.example.travelconnect.viewmodels.PlanTripViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
 
 class PlanTripFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     private lateinit var binding: FragmentPlanTripBinding
+    private lateinit var dbHelper: DBHelper
+    private lateinit var tripViewModel: PlanTripViewModel
+    private var targetTextView: TextView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,13 +42,65 @@ class PlanTripFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-         setTransparentStatusBar()
-         setupLocationACTV()
-         setupFoodSpinner()
+        tripViewModel = ViewModelProvider(this).get(PlanTripViewModel::class.java)
+
+        setTransparentStatusBar()
+        setupLocationACTV()
+        setupFoodSpinner()
+
+
+        dbHelper = DBHelper(requireContext())
+
+        // Example: Get location names with IDs
+        val locationNamesWithIds = dbHelper.getLocationNamesWithIds()
+
+        // Set up the AutoCompleteTextView adapter
+        val adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_dropdown_item_1line,
+            locationNamesWithIds.map { it.first })
+        binding.actv.setAdapter(adapter)
+        binding.actv.threshold = 1
 
         binding.sDate.setOnClickListener {
+            targetTextView = binding.txtSDate
             showDatePickerDialog(this@PlanTripFragment)
         }
+
+        binding.eDate.setOnClickListener {
+            targetTextView = binding.txtEDate
+            showDatePickerDialog(this@PlanTripFragment)
+        }
+        val (token, avatarString) = getFromSharedPreferences()
+        binding.btnDone.setOnClickListener {
+            // Assuming you have the necessary data for the trip
+            val location = binding.actv.text.toString()
+            val startDate = binding.txtSDate.text.toString()
+            val endDate = binding.txtEDate.text.toString()
+            val foodPref = binding.dateSpinner.selectedItem.toString()
+
+            tripViewModel.addTrip(token, location, startDate, endDate, foodPref)
+
+            binding.actv.setText("")
+            binding.txtSDate.text = ""
+            binding.txtEDate.text = ""
+            binding.dateSpinner.setSelection(0)
+        }
+
+        // Observe the result of adding a trip
+        tripViewModel.addTripResultLiveData.observe(viewLifecycleOwner) { result ->
+            if (result) {
+                Toast.makeText(requireContext(), "trip added", Toast.LENGTH_SHORT).show()
+                // Trip added successfully
+                // You can navigate to another fragment or perform other actions
+                // based on the success of adding the trip
+            } else {
+                // Failed to add trip
+                // Handle the failure scenario
+            }
+        }
+
+
     }
 
 
@@ -49,7 +111,8 @@ class PlanTripFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
         val formattedDate = SimpleDateFormat("dd/MM/yyyy").format(selectedDate.time)
 
-        binding.txtSDate.text = "$formattedDate"
+        // Check if the targetTextView is not null before updating
+        targetTextView?.text = formattedDate
     }
 
     private fun setupLocationACTV() {

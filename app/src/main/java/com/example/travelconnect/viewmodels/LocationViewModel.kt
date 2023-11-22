@@ -35,4 +35,6 @@ class LocationViewModel(private val repository: Repository) : ViewModel() {
         })
     }
 
+
+
 }

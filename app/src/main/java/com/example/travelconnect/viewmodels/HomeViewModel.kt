@@ -44,7 +44,7 @@ class HomeViewModel(val application: Context): ViewModel()  {
                             //TODO: add insert and retrieve function here.
                             dbHelper = DBHelper(application)
 
-                            dbHelper.clearAllLocations()
+                            //dbHelper.clearAllLocations()
                             // Example: Insert data
                             //val locationItem = LocationItem("1", "Location One", "Province A", "image_url", 4.5)
                             locations.forEach { item->

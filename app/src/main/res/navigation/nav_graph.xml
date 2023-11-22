@@ -45,16 +45,33 @@
         <argument
             android:name="id"
             app:argType="string" />
+        <action
+            android:id="@+id/action_locationFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+        <action
+            android:id="@+id/action_locationFragment_to_planTripFragment"
+            app:destination="@id/planTripFragment" />
     </fragment>
     <fragment
         android:id="@+id/planTripFragment"
         android:name="com.example.travelconnect.views.PlanTripFragment"
         android:label="PlanTripFragment" >
 
+        <action
+            android:id="@+id/action_planTripFragment_to_locationFragment"
+            app:destination="@id/locationFragment" />
     </fragment>
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.example.travelconnect.views.UserProfileFragment"
         android:label="UserProfileFragment" />
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.example.travelconnect.views.WebViewFragment"
+        android:label="WebViewFragment" >
+        <action
+            android:id="@+id/action_webViewFragment_to_locationFragment"
+            app:destination="@id/locationFragment" />
+    </fragment>
 
 </navigation>

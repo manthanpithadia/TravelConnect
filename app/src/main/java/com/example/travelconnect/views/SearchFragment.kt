@@ -19,12 +19,14 @@ import com.example.travelconnect.databinding.FragmentSearchBinding
 import com.example.travelconnect.utils.getLocationNamesWithIds
 import com.example.travelconnect.utils.setTransparentStatusBar
 import com.example.travelconnect.viewmodels.SearchViewModel
+import com.google.android.gms.location.FusedLocationProviderClient
 
 class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
     private lateinit var viewModel: SearchViewModel
     private lateinit var dbHelper: DBHelper
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -94,9 +96,4 @@ class SearchFragment : Fragment() {
 
     }
 
-
-    private fun navigateToDestinationFragment() {
-
-
-    }
 }
