@@ -27,12 +27,12 @@ class LoginActivity : AppCompatActivity() {
         viewModel.loginResultLiveData.observe(this) { loginSuccessful ->
             if (loginSuccessful) {
                 // Handle successful login
-                Toast.makeText(this, "Sign up successful", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
                // Log.i("Log", "Done")
                 startActivity(Intent(this, ActivityNavigation::class.java))
             } else {
                 // Handle login failure
-                Toast.makeText(this, "Sign up failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
                // Log.i("Log", "Failed")
             }
         }
@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
         binding.button.setOnClickListener {
             val username = binding.usernameEditText.text.toString()
             val password = binding.edtPassword.text.toString()
-            viewModel.performLogin()
+            viewModel.performLogin(username,password)
         }
     }
 }

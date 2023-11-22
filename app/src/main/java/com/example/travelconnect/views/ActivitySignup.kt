@@ -39,8 +39,8 @@ class ActivitySignup : AppCompatActivity() {
         }
 
         // Sign up button
-        binding.button.setOnClickListener {
-            viewModel.performSignup()
+        binding.btnSignUp.setOnClickListener {
+            viewModel.performSignup(binding.signupUname.toString(), binding.signupPass.toString())
         }
     }
 }

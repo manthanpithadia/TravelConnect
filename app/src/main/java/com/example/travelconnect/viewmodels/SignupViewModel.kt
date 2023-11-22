@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class SignupViewModel(val application: Application) : ViewModel() {
     val signupResultLiveData = MutableLiveData<Boolean>()
 
-    fun performSignup() {
+    fun performSignup(email:String, pass: String) {
         // Create a Retrofit instance
         val retrofit = Retrofit.Builder()
             .baseUrl("https://travel-app-live-dc32b92a6df0.herokuapp.com/") // Your API base URL
@@ -26,24 +26,26 @@ class SignupViewModel(val application: Application) : ViewModel() {
         val apiService = retrofit.create(ApiService::class.java)
 
         // Create the request body
-        val request = SignUpRequest(email = "email14123", password = "abcd564654")
+        val request = SignUpRequest(email,pass)
 
         // Make the API call
         val call = apiService.signUp(request)
 
         call.enqueue(object : retrofit2.Callback<Any> {
             override fun onResponse(call: Call<Any>, response: retrofit2.Response<Any>) {
-                if (response.isSuccessful) {
+                if (response.code() == 201) {
                     val responseBody = response.body()
+                    Log.d("Log",responseBody.toString())
                     if (responseBody is Map<*, *>) {
                         val token = responseBody["token"] as? String
-                        val avatarString = responseBody["avatarString"] as? String
+                        //val avatarString = responseBody["avatarString"] as? String
 
                         // Store the token and other information in SharedPreferences
-                        application.saveToSharedPreferences(token,avatarString)
+                        application.saveToSharedPreferences(token,"")
                         application.getFromSharedPreferences()
                         // Log success
                         Log.i("Log", "Sign up successful")
+                        signupResultLiveData.value = true
                     } else {
                         // Log error
                         Log.i("Log", "Invalid response body")
@@ -53,6 +55,7 @@ class SignupViewModel(val application: Application) : ViewModel() {
                 } else {
                     //   Toast. makeText(context,"Sign up failed", Toast. LENGTH_SHORT)
                     Log.i("Log","Failed")
+                    signupResultLiveData.value = false
                 }
             }
 

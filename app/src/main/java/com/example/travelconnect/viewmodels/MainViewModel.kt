@@ -14,7 +14,7 @@ class MainViewModel(val application: Application) : ViewModel() {
 
     val loginResultLiveData = MutableLiveData<Boolean>()
 
-    fun performLogin() {
+    fun performLogin(email:String, pass: String) {
         // Create a Retrofit instance
         val retrofit = Retrofit.Builder()
             .baseUrl("https://travel-app-live-dc32b92a6df0.herokuapp.com/") // Your API base URL
@@ -24,7 +24,7 @@ class MainViewModel(val application: Application) : ViewModel() {
         val apiService = retrofit.create(ApiService::class.java)
 
         // Create the request body
-        val request = LoginRequest(email = "konark dave", password = "asd")
+        val request = LoginRequest(email,pass)
 
         // Make the API call
         val call = apiService.login(request)
