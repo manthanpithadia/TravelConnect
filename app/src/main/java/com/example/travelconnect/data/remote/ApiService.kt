@@ -5,7 +5,9 @@ import ImageModel
 import LocationDetails
 import LocationItem
 import com.example.travelconnect.data.model.AddTripRequest
+import com.example.travelconnect.data.model.ExtendedModel
 import com.example.travelconnect.data.model.LoginRequest
+import com.example.travelconnect.data.model.RestaurentItem
 import com.example.travelconnect.data.model.SignUpRequest
 import com.example.travelconnect.data.model.UserProfile
 import retrofit2.Call
@@ -32,11 +34,17 @@ interface ApiService {
     @POST("dashboard/activities")
     fun getActivities(): Call<List<ActivityItem>>
 
+    @POST("dashboard/restaurants")
+    fun getRestaurent(): Call<List<RestaurentItem>>
+
     @POST("searchScreen/allImagesShuffled")
     fun getImages(): Call<List<ImageModel>>
 
     @POST("location/{id}")
     fun getLocationDetails(@Path("id") id: String): Call<LocationDetails>
+
+    @POST("dashboard/{name}")
+    fun getExtended(@Path("name") name: String): Call<ExtendedModel>
 
     @POST("trip/addtrip")
     fun addTrip(@Body request: AddTripRequest): Call<Any>

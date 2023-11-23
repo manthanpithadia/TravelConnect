@@ -13,6 +13,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.travelconnect.data.model.RestaurentItem
 import com.example.travelconnect.data.remote.LocationApiClient
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -86,6 +87,26 @@ class HomeViewModel(val application: Context): ViewModel()  {
             }
 
             override fun onFailure(call: Call<List<ActivityItem>>, t: Throwable) {
+                // Handle network errors
+            }
+        })
+
+        return data
+    }
+
+    fun getRestaurents(): LiveData<List<RestaurentItem>> {
+        val data = MutableLiveData<List<RestaurentItem>>()
+
+        activityApiService.getRestaurent().enqueue(object : Callback<List<RestaurentItem>> {
+            override fun onResponse(call: Call<List<RestaurentItem>>, response: Response<List<RestaurentItem>>) {
+                if (response.isSuccessful) {
+                    data.value = response.body()
+                } else {
+                    // Handle the API error
+                }
+            }
+
+            override fun onFailure(call: Call<List<RestaurentItem>>, t: Throwable) {
                 // Handle network errors
             }
         })

@@ -30,18 +30,19 @@
         android:id="@+id/txt_trip_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
         android:fontFamily="@font/montserrat"
         android:text="Oct 10 to Oct 14"
         android:textColor="@color/txt_light_white"
         android:textSize="@dimen/_10sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_trip_title"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_v90"
-        app:layout_constraintTop_toTopOf="@+id/txt_trip_title" />
+        app:layout_constraintStart_toStartOf="@+id/guideline_v2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_trip_title" />
 
     <TextView
         android:id="@+id/txt_trip_province"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:fontFamily="@font/montserrat"
         android:text="Alberta, CA"
         android:textColor="@color/txt_light_white"

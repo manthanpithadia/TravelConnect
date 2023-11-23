@@ -23,67 +23,33 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/bg_title_img"
+                android:id="@+id/bg_extended_title_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/img_destinaiton" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_90sdp"
+                android:background="@drawable/gradient_black_top_to_bottom"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="@+id/guideline_v10_updated"
-                app:layout_constraintTop_toTopOf="@+id/guideline_h05">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:src="@drawable/ic_cloudy" />
-
-                <TextView
-                    android:id="@+id/txt_weather"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:text="9°"
-                    android:textColor="@color/txt_light_white"
-                    android:textSize="@dimen/_14sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/title" />
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/btn_share"
-                android:padding="@dimen/_10sdp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_share"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_v90_updated"
-                app:layout_constraintTop_toTopOf="@+id/guideline_h05" />
 
 
             <TextView
-                android:id="@+id/txt_location_name"
+                android:id="@+id/txt_extended_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="Banff"
-                android:textColor="@color/txt_white"
-                android:textSize="@dimen/_22sdp"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:textColor="@color/txt_light_white"
+                android:textSize="@dimen/_18sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_v90_updated"
                 app:layout_constraintStart_toStartOf="@+id/guideline_v10_updated"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_60sdp"
-                android:background="@drawable/gradient_black_top_to_bottom"
-                app:layout_constraintBottom_toBottomOf="parent" />
 
 
             <androidx.constraintlayout.widget.Guideline
@@ -120,14 +86,14 @@
         app:layout_constraintTop_toTopOf="@+id/guideline_h27">
 
         <LinearLayout
-            android:id="@+id/btn_direction"
+            android:id="@+id/btn_extended_direction"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="@dimen/_9sdp"
             android:orientation="horizontal"
+            android:padding="@dimen/_9sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/v50"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -149,35 +115,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/btn_planTrip"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:padding="@dimen/_9sdp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn_direction"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <!-- Btn Plan Trip Code -->
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_plan_trip" />
-
-            <TextView
-                android:id="@+id/txt_add_trip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat"
-                android:text="Plan a Trip"
-                android:textColor="@color/txt_light_white"
-                android:textSize="@dimen/_12sdp"
-                app:layout_constraintTop_toBottomOf="@+id/title" />
-        </LinearLayout>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/v50"
@@ -215,7 +152,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView_location_images"
+                    android:id="@+id/recyclerView_extended_imgs"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -232,24 +169,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:text="@string/explore"
+                    android:text="Reviews"
                     android:textColor="@color/txt_light_white"
                     android:textSize="@dimen/_16sdp"
                     app:layout_constraintEnd_toStartOf="@+id/guideline90"
                     app:layout_constraintStart_toStartOf="@+id/guideline10"
-                    app:layout_constraintTop_toBottomOf="@+id/recyclerView_location_images" />
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerView_extended_imgs" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView_explore_images"
+                    android:id="@+id/recyclerView_reviews"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toStartOf="@+id/guideline90"
                     app:layout_constraintStart_toStartOf="@+id/guideline10"
                     app:layout_constraintTop_toBottomOf="@+id/textView2"
-                    tools:itemCount="1"
-                    tools:listitem="@layout/cardview_explore" />
+                    tools:itemCount="2"
+                    tools:listitem="@layout/cardview_extended_review" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline10"

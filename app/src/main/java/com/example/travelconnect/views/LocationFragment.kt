@@ -81,7 +81,7 @@ class LocationFragment : Fragment() {
         // Assuming you have a button with the ID btnOpenWebView
         binding.btnDirection.setOnClickListener {
             // Use the WebViewFragment to open the URL
-            openWebViewFragment("https://www.google.com/maps/dir/your+location/$name")
+            openWebViewFragment("https://www.google.com/maps/dir/waterloo/$name")
         }
 
         binding.btnPlanTrip.setOnClickListener {

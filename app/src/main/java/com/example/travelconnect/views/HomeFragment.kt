@@ -22,6 +22,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.travelconnect.R
 import com.example.travelconnect.data.model.CardItemTypeThree
+import com.example.travelconnect.data.model.RestaurentItem
 import com.example.travelconnect.databinding.FragmentHomeBinding
 import com.example.travelconnect.utils.setTransparentStatusBar
 import com.example.travelconnect.viewmodels.HomeViewModel
@@ -34,6 +35,7 @@ import com.squareup.picasso.Picasso
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
+    private lateinit var dbHelper: DBHelper
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val locationPermissionCode = 123
@@ -52,10 +54,11 @@ class HomeFragment : Fragment() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         setTransparentStatusBar()
 
+
         val viewModelFactory = HomeViewModelFactory(requireContext())
         //viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
-
+        dbHelper = DBHelper(requireContext())
 
         // Check and request location permissions
         if (ContextCompat.checkSelfPermission(
@@ -113,10 +116,14 @@ class HomeFragment : Fragment() {
             binding.recyclerViewCard2.adapter = createActivityAdapter(activities)
         })
 
-        // card view type 2
+        // card view type 3
         binding.recyclerViewCard3.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        val cardItemTypeThree = createDummyCardItemsTypeThree()
-        binding.recyclerViewCard3.adapter = CardTypeThreeAdapter(requireContext(), cardItemTypeThree)
+        viewModel.getRestaurents().observe(viewLifecycleOwner, Observer { restaurants ->
+            // Update the adapter with the data
+            //  val cardAdapter = CardTypeTwoAdapter(requireContext(), activities)
+            binding.recyclerViewCard3.adapter = createRestaurentAdapter(restaurants)
+        })
+
     }
 
     private fun createActivityAdapter(activities:List<ActivityItem>): GenericAdapter<ActivityItem> {
@@ -138,11 +145,60 @@ class HomeFragment : Fragment() {
                     // Handle the item click here
                     // For example, you can display a Toast message with the item's text
                     Toast.makeText(requireContext(), "Item clicked: ${item.name}", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_homeFragment_to_locationFragment)
+                    //findNavController().navigate(R.id.action_homeFragment_to_locationFragment)
+                    val args = Bundle().apply {
+                        putString("name", item.name)
+                    }
+
+                    // TODO: Uncomment this
+                    /*view?.let {
+                        Navigation.findNavController(it)
+                            .navigate(com.example.travelconnect.R.id.action_homeFragment_to_extendedFragment, args)
+                    }*/
                 }
             }
         ).apply { setData(activities) }
     }
+
+    private fun createRestaurentAdapter(activities:List<RestaurentItem>): GenericAdapter<RestaurentItem> {
+        return GenericAdapter<RestaurentItem>(
+            R.layout.cardview_type3, // Replace with your item layout resource
+            onBind = { itemView, item ->
+                val imageView: ImageView = itemView.findViewById(R.id.img_card_background3)
+                val titleTextView: TextView = itemView.findViewById(R.id.txt_card_title3)
+                val locationTextView: TextView = itemView.findViewById(R.id.txt_card_location3)
+                val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar3)
+                val txtRating: TextView = itemView.findViewById(R.id.txt_rating3)
+
+                Picasso.get().load(item.img).resize(250, 250)
+                    .centerCrop().into(imageView)
+                titleTextView.text = item.name
+                locationTextView.text = item.city
+                ratingBar.rating = item.rating.toFloat()
+                txtRating.text = item.rating.toFloat().toString()
+
+            },
+            onItemClickListener = object : GenericAdapter.OnItemClickListener<RestaurentItem> {
+                override fun onItemClick(item: RestaurentItem) {
+                    // Handle the item click here
+                    // For example, you can display a Toast message with the item's text
+                    Toast.makeText(requireContext(), "Item clicked: ${item.name}", Toast.LENGTH_SHORT).show()
+                    //findNavController().navigate(R.id.action_homeFragment_to_locationFragment)
+                    val args = Bundle().apply {
+                        putString("name", item.name)
+                    }
+
+                    // TODO: Uncomment this
+                    /*view?.let {
+                        Navigation.findNavController(it)
+                            .navigate(com.example.travelconnect.R.id.action_homeFragment_to_extendedFragment, args)
+                    }*/
+                }
+            }
+        ).apply { setData(activities) }
+    }
+
+
     private fun createLocationAdapter(locations:List<LocationItem>): GenericAdapter<LocationItem> {
         return GenericAdapter<LocationItem>(
             R.layout.cardview_type1, // Replace with your item layout resource
@@ -167,6 +223,24 @@ class HomeFragment : Fragment() {
                     // Handle the item click here
                     // For example, you can display a Toast message with the item's text
                     Toast.makeText(requireContext(), "Item clicked: ${item.name}", Toast.LENGTH_SHORT).show()
+
+                    // Retrieve the ID based on the location name
+                    val selectedId = dbHelper.getLocationIdByName(item.name)
+
+                    if (selectedId != null) {
+                        // Navigate to LocationFragment and pass name and ID as arguments
+                        val args = Bundle().apply {
+                            putString("name", item.name)
+                            putString("id", selectedId)
+                        }
+
+                        view?.let {
+                            Navigation.findNavController(it)
+                                .navigate(com.example.travelconnect.R.id.action_homeFragment_to_locationFragment, args)
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "Error retrieving location ID", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         ).apply { setData(locations) }

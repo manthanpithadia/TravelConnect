@@ -1,6 +1,7 @@
 package com.example.travelconnect.data.repositories
 
 import LocationDetails
+import com.example.travelconnect.data.model.ExtendedModel
 import com.example.travelconnect.data.model.LoginRequest
 import com.example.travelconnect.data.model.UserProfile
 import com.example.travelconnect.data.remote.ApiService
@@ -15,5 +16,9 @@ class Repository(private val apiService: ApiService) {
 
     fun getLocationDetails(id: String): Call<LocationDetails> {
         return apiService.getLocationDetails(id)
+    }
+
+    fun getExtendedData(name: String): Call<ExtendedModel> {
+        return apiService.getExtended(name)
     }
 }

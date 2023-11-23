@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TravelConnect"
+        android:theme="@style/Base.Theme.TravelConnect"
         tools:targetApi="31">
 
         <activity
