@@ -76,7 +76,6 @@
             android:id="@+id/signup_uname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="Enter your username"
             android:importantForAccessibility="yes"
             android:inputType="textEmailAddress" />
 
@@ -105,7 +104,6 @@
             android:id="@+id/signup_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="Enter your username"
             android:importantForAccessibility="yes"
             android:inputType="textPassword" />
 

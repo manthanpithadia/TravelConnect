@@ -48,10 +48,12 @@ class HomeViewModel(val application: Context): ViewModel()  {
                             //dbHelper.clearAllLocations()
                             // Example: Insert data
                             //val locationItem = LocationItem("1", "Location One", "Province A", "image_url", 4.5)
-                            locations.forEach { item->
-                                dbHelper.insertLocation(item)
-                            }
 
+                            if(!dbHelper.isTableExists(dbHelper.writableDatabase)) {
+                                locations.forEach { item ->
+                                    dbHelper.insertLocation(item)
+                                }
+                            }
                             // Example: Query data
                             /*val loc = dbHelper.queryLocations()
 
@@ -93,6 +95,7 @@ class HomeViewModel(val application: Context): ViewModel()  {
 
         return data
     }
+
 
     fun getRestaurents(): LiveData<List<RestaurentItem>> {
         val data = MutableLiveData<List<RestaurentItem>>()

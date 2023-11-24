@@ -14,8 +14,7 @@
             android:id="@+id/img_card_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/img_destinaiton"
-            android:scaleType="centerCrop"/>
+            android:src="@drawable/img_destinaiton"/>
         <!-- Add a View for the gradient -->
         <View
             android:layout_width="match_parent"

@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.travelconnect.ActivityNavigation
 import com.example.travelconnect.databinding.ActivityLoginBinding
+import com.example.travelconnect.utils.isValidEmail
+import com.example.travelconnect.utils.isValidPassword
 import com.example.travelconnect.viewmodels.LoginViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
@@ -40,9 +42,16 @@ class LoginActivity : AppCompatActivity() {
 // Trigger the login operation in the ViewModel
 
         binding.button.setOnClickListener {
-            val username = binding.usernameEditText.text.toString()
+
+            val email = binding.usernameEditText.text.toString()
             val password = binding.edtPassword.text.toString()
-            viewModel.performLogin(username,password)
+
+            if (email.isValidEmail() && password.isValidPassword()) {
+                // Both email and password are valid, proceed with sign up
+                viewModel.performLogin(email, password)
+            } else {
+                Toast.makeText(this, "Incorrect Format", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

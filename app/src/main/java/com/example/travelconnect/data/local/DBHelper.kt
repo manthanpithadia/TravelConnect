@@ -39,7 +39,7 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         val db = writableDatabase
 
         // Check if the table exists
-        if (isTableExists(db, TABLE_NAME)) {
+        if (isTableExists(db)) {
             // Table exists, proceed with insertion
             val values = ContentValues().apply {
                 put(COLUMN_ID, locationItem.id)
@@ -65,8 +65,8 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
     }
 
     // Function to check if a table exists in the database
-    private fun isTableExists(db: SQLiteDatabase, tableName: String): Boolean {
-        val query = "SELECT name FROM sqlite_master WHERE type='table' AND name='$tableName'"
+    fun isTableExists(db: SQLiteDatabase): Boolean {
+        val query = "SELECT name FROM sqlite_master WHERE type='table' AND name='$TABLE_NAME'"
         val cursor = db.rawQuery(query, null)
         val tableExists = cursor.moveToFirst()
         cursor.close()

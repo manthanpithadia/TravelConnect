@@ -114,6 +114,7 @@ class HomeFragment : Fragment() {
             // Update the adapter with the data
           //  val cardAdapter = CardTypeTwoAdapter(requireContext(), activities)
             binding.recyclerViewCard2.adapter = createActivityAdapter(activities)
+
         })
 
         // card view type 3
@@ -135,7 +136,7 @@ class HomeFragment : Fragment() {
                 val locationTextView: TextView = itemView.findViewById(R.id.txt_card_location)
                 // Load the image using Picasso (you may need to add Picasso as a dependency)
                 // Load the image using Picasso (make sure to add Picasso dependency)
-                Picasso.get().load(item.img).resize(250, 250)
+                Picasso.get().load(item.img).resize(200, 200)
                     .centerCrop().into(imageView)
                 titleTextView.text = item.name
                 locationTextView.text = item.province
@@ -151,10 +152,10 @@ class HomeFragment : Fragment() {
                     }
 
                     // TODO: Uncomment this
-                    /*view?.let {
+                    view?.let {
                         Navigation.findNavController(it)
                             .navigate(com.example.travelconnect.R.id.action_homeFragment_to_extendedFragment, args)
-                    }*/
+                    }
                 }
             }
         ).apply { setData(activities) }
@@ -170,7 +171,7 @@ class HomeFragment : Fragment() {
                 val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar3)
                 val txtRating: TextView = itemView.findViewById(R.id.txt_rating3)
 
-                Picasso.get().load(item.img).resize(250, 250)
+                Picasso.get().load(item.img).resize(200, 200)
                     .centerCrop().into(imageView)
                 titleTextView.text = item.name
                 locationTextView.text = item.city
@@ -189,10 +190,10 @@ class HomeFragment : Fragment() {
                     }
 
                     // TODO: Uncomment this
-                    /*view?.let {
+                    view?.let {
                         Navigation.findNavController(it)
                             .navigate(com.example.travelconnect.R.id.action_homeFragment_to_extendedFragment, args)
-                    }*/
+                    }
                 }
             }
         ).apply { setData(activities) }
@@ -209,7 +210,7 @@ class HomeFragment : Fragment() {
                 val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBar)
                 val txtRating: TextView = itemView.findViewById(R.id.txt_rating)
                 // Load the image using Picasso (you may need to add Picasso as a dependency)
-                Picasso.get().load(item.img).resize(250, 250)
+                Picasso.get().load(item.img).resize(200, 200)
                     .centerCrop().into(imageView)
 
                 titleTextView.text = item.name

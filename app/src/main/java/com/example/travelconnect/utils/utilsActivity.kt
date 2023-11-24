@@ -21,5 +21,13 @@ fun Context.getFromSharedPreferences() {
     Log.d("Log", "Token: $token, AvatarString: $avatarString")
 }
 
+fun String.isValidEmail(): Boolean {
+    return android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
+}
 
+fun String.isValidPassword(): Boolean {
+    // Customize the password validation logic based on your requirements
+    // For example, check for a minimum length or any other rules
+    return this.length >= 6
+}
 
