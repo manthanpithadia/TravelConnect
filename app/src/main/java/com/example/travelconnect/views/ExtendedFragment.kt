@@ -1,6 +1,7 @@
 package com.example.travelconnect.views
 
 import GenericAdapter
+import HomeViewModelFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ import com.example.travelconnect.databinding.FragmentExtendedBinding
 import com.example.travelconnect.utils.setTransparentStatusBar
 import com.example.travelconnect.viewmodels.ExtendedViewModel
 import com.example.travelconnect.viewmodels.ExtendedViewModelFactory
+import com.example.travelconnect.viewmodels.HomeViewModel
 import com.squareup.picasso.Picasso
 
 class ExtendedFragment : Fragment()  {
@@ -30,7 +32,7 @@ class ExtendedFragment : Fragment()  {
     private lateinit var viewModel: ExtendedViewModel
     private lateinit var imageAdapter: GenericAdapter<String>
     private lateinit var reviewAdapter: GenericAdapter<String>
-
+    lateinit var name: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,13 +44,14 @@ class ExtendedFragment : Fragment()  {
         super.onViewCreated(view, savedInstanceState)
 
         setTransparentStatusBar()
-        val name = arguments?.getString("name")
+        name = arguments?.getString("name").toString()
 
         viewModel = ViewModelProvider(
             this,
             ExtendedViewModelFactory(Repository(LocationApiClient.apiService)))[ExtendedViewModel::class.java]
-        imageAdapter = createImageAdapter()
 
+        imageAdapter = createImageAdapter()
+        binding.txtExtendedTitle.text = name
         binding.btnExtendedDirection.setOnClickListener {
             openWebViewFragment("https://www.google.com/maps/dir/waterloo/$name")
         }
@@ -92,10 +95,11 @@ class ExtendedFragment : Fragment()  {
             R.layout.cardview_type2, // Replace with your item layout resource
             onBind = { itemView, imageUrl ->
                 val imageView: ImageView = itemView.findViewById(R.id.img_card_background)
-
+                val textView: TextView = itemView.findViewById(R.id.txt_card_location2)
                 // Load the image using Picasso (you may need to add Picasso as a dependency)
                 Picasso.get().load(imageUrl).resize(250, 250)
                     .centerCrop().into(imageView)
+                textView.text = name
             },
             onItemClickListener = object : GenericAdapter.OnItemClickListener<String> {
                 override fun onItemClick(item: String) {

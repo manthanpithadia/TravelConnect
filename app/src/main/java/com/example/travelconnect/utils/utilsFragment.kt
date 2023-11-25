@@ -29,7 +29,7 @@ fun Fragment.showDatePickerDialog(listener: DatePickerDialog.OnDateSetListener) 
     val month = calendar.get(Calendar.MONTH)
     val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-    val datePickerDialog = DatePickerDialog(requireContext(),listener, year, month, day)
+    val datePickerDialog = DatePickerDialog(requireContext(), R.style.MyDatePickerDialogTheme,listener, year, month, day)
 
     datePickerDialog.show()
 }

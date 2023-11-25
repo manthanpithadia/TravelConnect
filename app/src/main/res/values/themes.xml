@@ -15,5 +15,14 @@
         <item name="android:background">@android:color/transparent</item> <!-- Set the color of the indicator -->
     </style>
 
+    <style name="MyDatePickerDialogTheme" parent="Theme.AppCompat.Dialog">
+
+        <item name="colorAccent">@color/chip_bg</item>
+        <item name="android:colorControlActivated">@color/txt_white</item>
+        <item name="android:colorControlHighlight">@color/chip_bg</item>
+        <item name="android:colorControlNormal">@color/chip_bg</item>
+        <item name="android:background">@color/bottom_nav_bar</item>
+    </style>
+
 
 </resources>

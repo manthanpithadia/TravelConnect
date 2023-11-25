@@ -2,6 +2,7 @@ package com.example.travelconnect.views
 
 import DBHelper
 import GridImageAdapter
+import HomeViewModelFactory
 import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -18,6 +20,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.travelconnect.databinding.FragmentSearchBinding
 import com.example.travelconnect.utils.getLocationNamesWithIds
 import com.example.travelconnect.utils.setTransparentStatusBar
+import com.example.travelconnect.viewmodels.HomeViewModel
 import com.example.travelconnect.viewmodels.SearchViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 
@@ -26,7 +29,8 @@ class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private lateinit var viewModel: SearchViewModel
     private lateinit var dbHelper: DBHelper
-
+    private lateinit var viewModel2: HomeViewModel
+    private lateinit var nameToIdMap: Map<String, String>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +43,7 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this)[SearchViewModel::class.java]
+        viewModel2 = ViewModelProvider(this, HomeViewModelFactory(requireContext())).get(HomeViewModel::class.java)
 
         dbHelper = DBHelper(requireContext())
 
@@ -46,9 +51,21 @@ class SearchFragment : Fragment() {
         val locationNamesWithIds = dbHelper.getLocationNamesWithIds()
 
         // Set up the AutoCompleteTextView adapter
-        val adapter = ArrayAdapter(requireContext(), R.layout.simple_dropdown_item_1line, locationNamesWithIds.map { it.first })
-        binding.searchBar.setAdapter(adapter)
-        binding.searchBar.threshold = 1
+
+        viewModel2.getTrendingLocations().observe(viewLifecycleOwner, Observer { locations ->
+            // Update the adapter with the data
+            // val cardAdapter = CardTypeOneAdapter(requireContext(), locations)
+             nameToIdMap = locations.associateBy { it.name }.mapValues { it.value.id }
+
+            val nameList: List<String> = locations.map { location ->
+                location.name
+            }
+            val adapter = ArrayAdapter(requireContext(), R.layout.simple_dropdown_item_1line, nameList)
+            binding.searchBar.setAdapter(adapter)
+            binding.searchBar.threshold = 1
+        })
+
+
 
         // You can set other AutoCompleteTextView properties and handle item selection if needed
 
@@ -57,7 +74,7 @@ class SearchFragment : Fragment() {
             val selectedName = binding.searchBar.adapter.getItem(position).toString()
 
             // Retrieve the ID based on the location name
-            val selectedId = dbHelper.getLocationIdByName(selectedName)
+            val selectedId = nameToIdMap[selectedName]
 
             if (selectedId != null) {
                 // Navigate to LocationFragment and pass name and ID as arguments

@@ -133,7 +133,7 @@ class HomeFragment : Fragment() {
             onBind = { itemView, item ->
                 val imageView: ImageView = itemView.findViewById(R.id.img_card_background)
                 val titleTextView: TextView = itemView.findViewById(R.id.txt_card_title)
-                val locationTextView: TextView = itemView.findViewById(R.id.txt_card_location)
+                val locationTextView: TextView = itemView.findViewById(R.id.txt_card_location2)
                 // Load the image using Picasso (you may need to add Picasso as a dependency)
                 // Load the image using Picasso (make sure to add Picasso dependency)
                 Picasso.get().load(item.img).resize(200, 200)
@@ -226,7 +226,7 @@ class HomeFragment : Fragment() {
                     Toast.makeText(requireContext(), "Item clicked: ${item.name}", Toast.LENGTH_SHORT).show()
 
                     // Retrieve the ID based on the location name
-                    val selectedId = dbHelper.getLocationIdByName(item.name)
+                    val selectedId = item.id
 
                     if (selectedId != null) {
                         // Navigate to LocationFragment and pass name and ID as arguments
